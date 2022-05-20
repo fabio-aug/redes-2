@@ -9,9 +9,13 @@ FEEDBACK = [
 ]
 
 def resolveQuestion(data):
-    question = data.split('-')
-    print(question)
-    print(data)
+    questions = eval(data)
+
+    for i in range(0,5,1):
+        if (questions[i] == FEEDBACK[i]):
+            print("CERTO")
+        else:
+            print("ERRO")
     return "Connection OK!"
 
 serverPort = 12000
