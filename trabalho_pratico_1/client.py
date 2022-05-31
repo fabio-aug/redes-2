@@ -42,12 +42,28 @@ def showResult(data):
     print(printUser)
 
 
+# Conexão;
 serverName = 'localhost'
 serverPort = 12000
+
+# Cria um novo socket para comunicação;
 clientSocket = socket(AF_INET, SOCK_STREAM)
+
+# Conecta o socket no servidor;
+# Endereço e porta;
 clientSocket.connect((serverName, serverPort))
+
+# Pega a sentença que vai ser enviada;
 sentence = getQuestions()
+
+# Envia o a mensagem para o servidor;
 clientSocket.send(sentence.encode())
+
+# Espera uma resposta do servidor;
 modifiedSentence = clientSocket.recv(1024)
+
+# Mostra trabalha a resposta e mostra ao usuário;
 showResult(modifiedSentence.decode())
+
+# Fecha a conexão;
 clientSocket.close()

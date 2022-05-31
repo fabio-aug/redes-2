@@ -50,14 +50,28 @@ def resolveQuestion(data):
     return str(responseData)
 
 
+# Conexão;
 serverPort = 12000
+
+# Cria um novo socket para comunicação;
 serverSocket = socket(AF_INET, SOCK_STREAM)
+
+# Atribui um endereço IP e uma porta ao socket;
+# Nessa caso qualquer endereço IP disponível e a porta 12000;
 serverSocket.bind(('', serverPort))
+
+# Limita o número de conexões que o servidor vai aceitar, antes de começar a recusar conexões;
+# Nessa caso duas, (0 e 1);
 serverSocket.listen(1)
+
 print('The server is ready to receive')
+
+# While para o servidor aceitar uma conexão;
+# Receber uma mensagem;
+# Tratar o dado e enviar uma resposta;
+# Assim que feito esse fluxo, ele fecha a conexão e roda novamente, preparado assim para outra conexão;
 while True:
     connectionSocket, addr = serverSocket.accept()
     sentence = resolveQuestion(connectionSocket.recv(1024).decode())
-    capitalizedSentence = sentence
-    connectionSocket.send(capitalizedSentence.encode())
+    connectionSocket.send(sentence.encode())
     connectionSocket.close()
